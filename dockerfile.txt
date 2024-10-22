@@ -1,0 +1,23 @@
+FROM python:3.9-slim-buster
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+
+COPY . .
+
+# Set environment variables (replace with your actual values)
+ENV BASE_DB_URL="postgresql://"
+ENV DB_PORTS="5432"
+ENV DB_NAME="your_db_name"
+ENV TABLE_NAME="your_table_name"
+ENV FLASK_APP=__init__:app
+ENV FLASK_ENV=development
+
+EXPOSE 5000
+
+
+
+CMD gunicorn --bind 0.0.0.0:5000 wsgi:app
