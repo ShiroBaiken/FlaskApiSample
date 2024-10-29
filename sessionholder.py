@@ -36,7 +36,7 @@ class UuidStorage:
         if not self.table:
             metadata = MetaData()
             metadata.reflect(bind=current_engine)
-            table_name = os.environ.get("TABLE_NAME")  # Get table name from environment variable
+            table_name = os.environ.get("TABLE_NAME") 
             self.table = sqlalchemy.Table(table_name, metadata, autoload_with=current_engine)
 
     def create_session(self, current_engine):
